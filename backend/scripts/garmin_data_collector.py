@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 import sys
 from dateutil.relativedelta import relativedelta
 import numpy as np
+import argparse
+import json
+import time
 
 # Load environment variables
 load_dotenv()
@@ -725,30 +728,40 @@ def calculate_current_phase(menstrual_data, current_date_str='2025-04-10'):
     except Exception as e:
         return {"error": f"Error calculating current phase: {str(e)}"}
 
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python garmin_data_collector.py <garmin_email> <garmin_password> <user_id>")
-        sys.exit(1)
-    
-    garmin_email = sys.argv[1]
-    garmin_password = sys.argv[2]
-    user_id = sys.argv[3]
-    
-    # Fetch activities
-    get_activities(garmin_email, garmin_password, user_id)
-    
-    # Fetch HR data and predict menstrual phases
-    get_hr_data(garmin_email, garmin_password, user_id)
+def validate_credentials(email, password):
+    try:
+        # Initialize Garmin client
+        client = Garmin(email, password)
+        
+        # Try to login
+        client.login()
+        
+        # If login successful, try to get user profile
+        client.get_user_profile()
+        
+        return True
+    except Exception as e:
+        print(f"Validation error: {str(e)}", file=sys.stderr)
+        return False
 
+def main():
+    parser = argparse.ArgumentParser(description='Garmin Data Collector')
+    parser.add_argument('--validate', action='store_true', help='Validate Garmin credentials only')
+    parser.add_argument('email', help='Garmin email')
+    parser.add_argument('password', help='Garmin password')
+    parser.add_argument('user_id', nargs='?', help='User ID for data collection')
     
-    # get_sleep_data(garmin_email, garmin_password, user_id)
-    # # Test menstrual data fetching and predict phases
-    # test(garmin_email, garmin_password, user_id)
+    args = parser.parse_args()
     
-    # Calculate the current phase for April 10, 2025
-    # menstrual_data = get_menstrual_data(garmin_email, garmin_password, user_id)
-    # if menstrual_data:
-    #     current_phase = calculate_current_phase(menstrual_data, '2025-04-10')
-    #     print("Current Phase on 2025-04-10:", current_phase)
+    if args.validate:
+        if validate_credentials(args.email, args.password):
+            print("Garmin credentials validated successfully")
+            sys.exit(0)
+        else:
+            print("Invalid Garmin credentials", file=sys.stderr)
+            sys.exit(1)
     
-    print("DONE")
+    # Rest of the existing data collection code...
+
+if __name__ == "__main__":
+    main()

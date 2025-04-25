@@ -155,6 +155,38 @@ app.post('/api/auth/register', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Validate Garmin credentials first
+    const pythonPath = getPythonPath();
+    const validateProcess = spawn(pythonPath, [
+      path.join(__dirname, '..', 'scripts', 'garmin_data_collector.py'),
+      '--validate',
+      garminEmail,
+      garminPassword
+    ]);
+
+    let validationOutput = '';
+    let validationError = '';
+
+    validateProcess.stdout.on('data', (data) => {
+      validationOutput += data.toString();
+    });
+
+    validateProcess.stderr.on('data', (data) => {
+      validationError += data.toString();
+    });
+
+    const validationResult = await new Promise((resolve) => {
+      validateProcess.on('close', (code) => {
+        resolve(code === 0);
+      });
+    });
+
+    if (!validationResult) {
+      return res.status(401).json({ 
+        error: 'Invalid Garmin credentials. Please check your email and password.' 
+      });
+    }
+
     const id = uuidv4();
 
     // Create user in Supabase
@@ -171,7 +203,6 @@ app.post('/api/auth/register', async (req, res) => {
     const token = Buffer.from(id, 'utf-8').toString('base64');
 
     // Start the Python script in the background
-    const pythonPath = getPythonPath();
     console.log(`Starting data collection with Python executable: ${pythonPath}`);
     
     const pythonProcess = spawn(pythonPath, [

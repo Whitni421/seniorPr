@@ -93,7 +93,7 @@ def main():
             update_user_data(user['email'], user['password'], user['id'])
             
         logging.info("Daily update completed successfully")
-        
+                
     except Exception as e:
         logging.error(f"Error in main execution: {str(e)}")
 

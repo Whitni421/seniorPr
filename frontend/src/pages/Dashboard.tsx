@@ -188,7 +188,7 @@ const Dashboard: React.FC = () => {
     }
 
     const currentPhase = menstrualPhases[menstrualPhases.length - 1];
-    const cycleLength = 28; // Standard cycle length
+    const cycleLength = 28;
     const phases = [
       { name: 'Menstrual', days: [1, 2, 3, 4, 5], color: '#FF4081' },     // Bright pink
       { name: 'Follicular', days: [6, 7, 8, 9, 10, 11, 12, 13], color: '#424242' },  // Dark grey
