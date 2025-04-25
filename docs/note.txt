@@ -1,0 +1,20 @@
+Need to test the update_values.py 
+Will take the user_id in body
+Check if its updating correctly 4/13 
+cron jobs
+chart
+logo
+encrypt password
+? user input workout plan
+research
+
+need:
+more ways top show data meaningfulness 
+adding lines to chart for each cycle 
+descriptions of how to train depending on phase 
+cron jobs -
+loading -
+verify sign in and sign up works correctly -
+
+
+Interesting Points:

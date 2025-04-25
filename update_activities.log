@@ -1,0 +1,15 @@
+2025-04-12 08:03:35,283 - INFO - Logging into Garmin Connect with email noworries514@outlook.com
+2025-04-12 08:03:38,690 - INFO - Fetching activities for 2025-04-11 for user_id 51d5417b-8791-4c3f-a9ae-4b13064d7974
+2025-04-12 08:03:38,822 - ERROR - Error collecting data for user_id 51d5417b-8791-4c3f-a9ae-4b13064d7974: 'str' object has no attribute 'get'
+2025-04-12 08:03:38,823 - ERROR - Deprecated: Alternative is to delete login tokens to logout.
+2025-04-12 08:03:38,824 - INFO - Logged out of Garmin Connect
+2025-04-12 08:04:10,749 - INFO - Logging into Garmin Connect with email noworries514@outlook.com
+2025-04-12 08:04:13,862 - INFO - Fetching activities for 2025-04-11 for user_id 51d5417b-8791-4c3f-a9ae-4b13064d7974
+2025-04-12 08:04:13,982 - ERROR - Error collecting data for user_id 51d5417b-8791-4c3f-a9ae-4b13064d7974: 'str' object has no attribute 'get'
+2025-04-12 08:04:13,983 - ERROR - Deprecated: Alternative is to delete login tokens to logout.
+2025-04-12 08:04:13,984 - INFO - Logged out of Garmin Connect
+2025-04-12 08:05:42,288 - INFO - Logging into Garmin Connect with email noworries514@outlook.com
+2025-04-12 08:05:45,309 - INFO - Fetching activities for 2025-04-11 for user_id 51d5417b-8791-4c3f-a9ae-4b13064d7974
+2025-04-12 08:05:45,415 - ERROR - Deprecated: Alternative is to delete login tokens to logout.
+2025-04-12 08:05:45,416 - INFO - Logged out of Garmin Connect
+2025-04-12 08:05:45,417 - INFO - Updated activity data successfully
