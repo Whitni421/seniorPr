@@ -1,3 +1,5 @@
+![Screenshot](images/Algorithm.png)
+
 source venv/bin/activate
 
 Available methods in garmin_client:
